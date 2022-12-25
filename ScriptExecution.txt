@@ -1,0 +1,110 @@
+
+Install Docker 
+------------------
+
+ systemctl status docker
+ 
+ sudo apt-get update
+ 
+ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+ 
+ 
+ echo   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ 
+ sudo apt-get update
+ sudo apt-get install docker-ce docker-ce-cli containerd.io
+ systemctl status docker
+ 
+ 
+ 
+Setup SQL Server on Docker 
+---------------------------------
+
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=test123$" -p 1433:1433 --name sql1 -h sql1 -d mcr.microsoft.com/mssql/server:2017-latest
+   
+docker container exec -it bfd52e3092ba bash 
+
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "test123$"
+
+Copy local file to docker 
+
+docker cp AdventureWorks2017.bak bfd52e3092ba:/root/
+
+docker exec -it 53e036b4bbad ls -ltr /root
+total 344
+-rwxr-xr-x 1 root root 350019 Jan 17 14:22 AdventureWorks2017.bak
+  
+  
+  cp /root/AdventureWorks2017.bak /var/opt/mssql/data/
+  
+  
+  
+SELECT      sys.databases.name,  
+            CONVERT(VARCHAR,SUM(size)*8/1024)+' MB' AS [Total disk space]  
+FROM        sys.databases   
+JOIN        sys.master_files  
+ON          sys.databases.database_id=sys.master_files.database_id  
+GROUP BY    sys.databases.name  
+ORDER BY    sys.databases.name
+#######################################################
+
+Install MS SQL Dirvers on Staging DB
+
+Install PostgreSQL Dirver on Stgaing 
+
+
+##########################################################  
+
+
+
+
+
+Set Env Variables in .srcfile 
+
+getDDL.sh
+	crtDbExSchema.sh
+	pushDDL.sh
+
+		validateObjects -- DB Reconcilator 
+		
+		
+		
+getData.sh
+	pushData.sh 		
+	 
+	pushIdx.sh 
+			Push Primary Key, Foreign Key and Index details ) 
+
+getIndx.sh ( Get Primary Key, Foreign Key and Index details )
+	
+crtYB_DbExSchema.sh
+			( Create database on Yugabyte Side, Create table DDL with PK clause )
+			  Drop 	FK constrints dropFKIndex.sh	
+			 )
+			 
+pushData_yb.sh 
+				- Certain errors are present with respect to data types which needs to checked on 
+			Build FKs
+
+
+1) Pull and transform DDLs to postgreSQL database using sql files for a list of Provided schemas.(getDDL.sh)
+	
+2) Create database and required extensions on PostgreSQL data. (pushDDL.sh)
+   Create required schemas on target 
+   Push transformed DDLs for a given list of schema.
+   (This will include table,sequence,index,primary and foreign key.)
+
+3) Perform data object(table,index and contraints ) validations. 
+
+4) Pull data from Source Database in column delemited file formated and store it on Staging Server. (getData.sh) 
+   
+   
+
+###############
+
+ysqlsh:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:16: ERROR:  Timed out: UpdateTransaction RPC (request call id 966) to 192.168.56.12:9100 timed out after 5.000s
+ysqlsh:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:17: ERROR:  Timed out: GetTableLocations { table_name: template1.pg_yb_catalog_version, table_id: 00000001000030008000000000001f4a, partition_start_key: uint32 db_oid=0, partition_list_version: 0, request_no: 3989, num_attempts: 2 } failed: timed out after deadline expired: GetTableLocations { table_name: template1.pg_yb_catalog_version, table_id: 00000001000030008000000000001f4a, partition_start_key: uint32 db_oid=0, partition_list_version: 0, request_no: 3989, num_attempts: 2 } passed its deadline 16955.126s (passed: 60.627s): Timed out (yb/rpc/outbound_call.cc:503): GetMasterRegistration RPC (request call id 1076) to 192.168.56.12:7100 timed out after 3.256s
+ysqlsh:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:18: ERROR:  Timed out: GetTableLocations { table_name: template1.pg_yb_catalog_version, table_id: 00000001000030008000000000001f4a, partition_start_key: uint32 db_oid=0, partition_list_version: 0, request_no: 3991, num_attempts: 2 } failed: timed out after deadline expired: GetTableLocations { table_name: template1.pg_yb_catalog_version, table_id: 00000001000030008000000000001f4a, partition_start_key: uint32 db_oid=0, partition_list_version: 0, request_no: 3991, num_attempts: 2 } passed its deadline 17081.326s (passed: 65.299s): Timed out (yb/rpc/outbound_call.cc:503): GetMasterRegistration RPC (request call id 1093) to 192.168.56.12:7100 timed out after 7.964s
+
+

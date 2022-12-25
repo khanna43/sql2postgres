@@ -1,0 +1,228 @@
+
+
+[root@Rhel7VM1 MSSQLTOPG]# ksh pushData.sh
+Loading tables in Target Database for schema HumanResources
+timing
+Timing is on.
+  \Copy HumanResources.EmployeePayHistory From '/root/MSSQLTOPG/data/csvData/HumanResources.EmployeePayHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 316
+Time: 22.770 ms
+  \Copy HumanResources.JobCandidate From '/root/MSSQLTOPG/data/csvData/HumanResources.JobCandidate.csv' DELIMITER '~' null as 'null' CSV;
+psql:/root/MSSQLTOPG/data/imprtSRC/HumanResources_copy.sql:2: ERROR:  missing data for column "ModifiedDate"
+CONTEXT:  COPY jobcandidate, line 1: "1~null~<ns:Resume xmlns:ns="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/Resume"><..."
+Time: 10.638 ms
+  \Copy HumanResources.Shift From '/root/MSSQLTOPG/data/csvData/HumanResources.Shift.csv' DELIMITER '~' null as 'null' CSV;
+COPY 3
+Time: 9.866 ms
+  \Copy HumanResources.Department From '/root/MSSQLTOPG/data/csvData/HumanResources.Department.csv' DELIMITER '~' null as 'null' CSV;
+COPY 16
+Time: 10.066 ms
+  \Copy HumanResources.Employee From '/root/MSSQLTOPG/data/csvData/HumanResources.Employee.csv' DELIMITER '~' null as 'null' CSV;
+COPY 290
+Time: 12.607 ms
+  \Copy HumanResources.EmployeeDepartmentHistory From '/root/MSSQLTOPG/data/csvData/HumanResources.EmployeeDepartmentHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 296
+Time: 10.555 ms
+Loading tables in Target Database for schema Production
+timing
+Timing is on.
+  \Copy Production.Illustration From '/root/MSSQLTOPG/data/csvData/Production.Illustration.csv' DELIMITER '~' null as 'null' CSV;
+COPY 5
+Time: 17.094 ms
+  \Copy Production.Location From '/root/MSSQLTOPG/data/csvData/Production.Location.csv' DELIMITER '~' null as 'null' CSV;
+COPY 14
+Time: 9.524 ms
+  \Copy Production.Product From '/root/MSSQLTOPG/data/csvData/Production.Product.csv' DELIMITER '~' null as 'null' CSV;
+COPY 504
+Time: 14.973 ms
+  \Copy Production.ScrapReason From '/root/MSSQLTOPG/data/csvData/Production.ScrapReason.csv' DELIMITER '~' null as 'null' CSV;
+COPY 16
+Time: 7.612 ms
+  \Copy Production.ProductCategory From '/root/MSSQLTOPG/data/csvData/Production.ProductCategory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 4
+Time: 9.432 ms
+  \Copy Production.ProductCostHistory From '/root/MSSQLTOPG/data/csvData/Production.ProductCostHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 395
+Time: 10.752 ms
+  \Copy Production.ProductDescription From '/root/MSSQLTOPG/data/csvData/Production.ProductDescription.csv' DELIMITER '~' null as 'null' CSV;
+psql:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:7: ERROR:  value too long for type character varying(400)
+CONTEXT:  COPY productdescription, line 97, column Description: "High-quality 1 threadless headset with a grease port for quick lubrication.~584C3390-088A-4995-8E6D-..."
+Time: 9.034 ms
+  \Copy Production.ProductDocument From '/root/MSSQLTOPG/data/csvData/Production.ProductDocument.csv' DELIMITER '~' null as 'null' CSV;
+COPY 32
+Time: 10.045 ms
+  \Copy Production.ProductInventory From '/root/MSSQLTOPG/data/csvData/Production.ProductInventory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 1069
+Time: 17.813 ms
+  \Copy Production.ProductListPriceHistory From '/root/MSSQLTOPG/data/csvData/Production.ProductListPriceHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 395
+Time: 12.908 ms
+  \Copy Production.ProductModel From '/root/MSSQLTOPG/data/csvData/Production.ProductModel.csv' DELIMITER '~' null as 'null' CSV;
+psql:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:11: ERROR:  missing data for column "rowguid"
+CONTEXT:  COPY productmodel, line 7: "7~HL Touring Frame~null~<root xmlns="http://schemas.microsoft.com/sqlserver/2004/07/adventure-works/..."
+Time: 6.838 ms
+  \Copy Production.ProductModelIllustration From '/root/MSSQLTOPG/data/csvData/Production.ProductModelIllustration.csv' DELIMITER '~' null as 'null' CSV;
+COPY 7
+Time: 7.649 ms
+  \Copy Production.ProductModelProductDescriptionCulture From '/root/MSSQLTOPG/data/csvData/Production.ProductModelProductDescriptionCulture.csv' DELIMITER '~' null as 'null' CSV;
+COPY 762
+Time: 13.262 ms
+  \Copy Production.BillOfMaterials From '/root/MSSQLTOPG/data/csvData/Production.BillOfMaterials.csv' DELIMITER '~' null as 'null' CSV;
+COPY 2679
+Time: 31.638 ms
+  \Copy Production.ProductProductPhoto From '/root/MSSQLTOPG/data/csvData/Production.ProductProductPhoto.csv' DELIMITER '~' null as 'null' CSV;
+COPY 504
+Time: 11.523 ms
+  \Copy Production.TransactionHistory From '/root/MSSQLTOPG/data/csvData/Production.TransactionHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 113443
+Time: 919.468 ms
+  \Copy Production.ProductReview From '/root/MSSQLTOPG/data/csvData/Production.ProductReview.csv' DELIMITER '~' null as 'null' CSV;
+psql:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:17: ERROR:  missing data for column "ModifiedDate"
+CONTEXT:  COPY productreview, line 1: "1~709~John Smith~2013-09-18 00:00:00.000~john@fourthcoffee.com~5~I can't believe I'm singing the pra..."
+Time: 7.035 ms
+  \Copy Production.TransactionHistoryArchive From '/root/MSSQLTOPG/data/csvData/Production.TransactionHistoryArchive.csv' DELIMITER '~' null as 'null' CSV;
+COPY 89253
+Time: 605.231 ms
+  \Copy Production.ProductSubcategory From '/root/MSSQLTOPG/data/csvData/Production.ProductSubcategory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 37
+Time: 12.662 ms
+  \Copy Production.UnitMeasure From '/root/MSSQLTOPG/data/csvData/Production.UnitMeasure.csv' DELIMITER '~' null as 'null' CSV;
+COPY 38
+Time: 13.805 ms
+  \Copy Production.WorkOrder From '/root/MSSQLTOPG/data/csvData/Production.WorkOrder.csv' DELIMITER '~' null as 'null' CSV;
+COPY 72591
+Time: 660.627 ms
+  \Copy Production.Culture From '/root/MSSQLTOPG/data/csvData/Production.Culture.csv' DELIMITER '~' null as 'null' CSV;
+psql:/root/MSSQLTOPG/data/imprtSRC/Production_copy.sql:22: ERROR:  null value in column "CultureID" of relation "culture" violates not-null constraint
+DETAIL:  Failing row contains (null, Invariant Language (Invariant Country), 2008-04-30 00:00:00+00).
+CONTEXT:  COPY culture, line 1: "null~Invariant Language (Invariant Country)~2008-04-30 00:00:00.000"
+Time: 7.212 ms
+  \Copy Production.WorkOrderRouting From '/root/MSSQLTOPG/data/csvData/Production.WorkOrderRouting.csv' DELIMITER '~' null as 'null' CSV;
+COPY 67131
+Time: 740.019 ms
+Loading tables in Target Database for schema Person
+timing
+Timing is on.
+  \Copy Person.Password From '/root/MSSQLTOPG/data/csvData/Person.Password.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19972
+Time: 148.514 ms
+  \Copy Person.Person From '/root/MSSQLTOPG/data/csvData/Person.Person.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19972
+Time: 589.438 ms
+  \Copy Person.PersonPhone From '/root/MSSQLTOPG/data/csvData/Person.PersonPhone.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19972
+Time: 171.034 ms
+  \Copy Person.PhoneNumberType From '/root/MSSQLTOPG/data/csvData/Person.PhoneNumberType.csv' DELIMITER '~' null as 'null' CSV;
+COPY 3
+Time: 9.832 ms
+  \Copy Person.Address From '/root/MSSQLTOPG/data/csvData/Person.Address.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19614
+Time: 171.602 ms
+  \Copy Person.AddressType From '/root/MSSQLTOPG/data/csvData/Person.AddressType.csv' DELIMITER '~' null as 'null' CSV;
+COPY 6
+Time: 26.481 ms
+  \Copy Person.StateProvince From '/root/MSSQLTOPG/data/csvData/Person.StateProvince.csv' DELIMITER '~' null as 'null' CSV;
+COPY 181
+Time: 24.452 ms
+  \Copy Person.BusinessEntity From '/root/MSSQLTOPG/data/csvData/Person.BusinessEntity.csv' DELIMITER '~' null as 'null' CSV;
+COPY 20777
+Time: 218.303 ms
+  \Copy Person.BusinessEntityAddress From '/root/MSSQLTOPG/data/csvData/Person.BusinessEntityAddress.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19614
+Time: 223.033 ms
+  \Copy Person.BusinessEntityContact From '/root/MSSQLTOPG/data/csvData/Person.BusinessEntityContact.csv' DELIMITER '~' null as 'null' CSV;
+COPY 909
+Time: 24.342 ms
+  \Copy Person.ContactType From '/root/MSSQLTOPG/data/csvData/Person.ContactType.csv' DELIMITER '~' null as 'null' CSV;
+COPY 20
+Time: 12.028 ms
+  \Copy Person.CountryRegion From '/root/MSSQLTOPG/data/csvData/Person.CountryRegion.csv' DELIMITER '~' null as 'null' CSV;
+COPY 238
+Time: 18.931 ms
+  \Copy Person.EmailAddress From '/root/MSSQLTOPG/data/csvData/Person.EmailAddress.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19972
+Time: 168.721 ms
+Loading tables in Target Database for schema Purchasing
+timing
+Timing is on.
+  \Copy Purchasing.ShipMethod From '/root/MSSQLTOPG/data/csvData/Purchasing.ShipMethod.csv' DELIMITER '~' null as 'null' CSV;
+COPY 5
+Time: 13.966 ms
+  \Copy Purchasing.ProductVendor From '/root/MSSQLTOPG/data/csvData/Purchasing.ProductVendor.csv' DELIMITER '~' null as 'null' CSV;
+COPY 460
+Time: 18.263 ms
+  \Copy Purchasing.Vendor From '/root/MSSQLTOPG/data/csvData/Purchasing.Vendor.csv' DELIMITER '~' null as 'null' CSV;
+COPY 104
+Time: 13.497 ms
+  \Copy Purchasing.PurchaseOrderDetail From '/root/MSSQLTOPG/data/csvData/Purchasing.PurchaseOrderDetail.csv' DELIMITER '~' null as 'null' CSV;
+COPY 8845
+Time: 81.888 ms
+  \Copy Purchasing.PurchaseOrderHeader From '/root/MSSQLTOPG/data/csvData/Purchasing.PurchaseOrderHeader.csv' DELIMITER '~' null as 'null' CSV;
+COPY 4012
+Time: 38.301 ms
+Loading tables in Target Database for schema Sales
+timing
+Timing is on.
+  \Copy Sales.SalesOrderHeaderSalesReason From '/root/MSSQLTOPG/data/csvData/Sales.SalesOrderHeaderSalesReason.csv' DELIMITER '~' null as 'null' CSV;
+COPY 27647
+Time: 117.557 ms
+  \Copy Sales.SalesPerson From '/root/MSSQLTOPG/data/csvData/Sales.SalesPerson.csv' DELIMITER '~' null as 'null' CSV;
+COPY 17
+Time: 12.504 ms
+  \Copy Sales.SalesPersonQuotaHistory From '/root/MSSQLTOPG/data/csvData/Sales.SalesPersonQuotaHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 163
+Time: 10.245 ms
+  \Copy Sales.SalesReason From '/root/MSSQLTOPG/data/csvData/Sales.SalesReason.csv' DELIMITER '~' null as 'null' CSV;
+COPY 10
+Time: 11.505 ms
+  \Copy Sales.SalesTaxRate From '/root/MSSQLTOPG/data/csvData/Sales.SalesTaxRate.csv' DELIMITER '~' null as 'null' CSV;
+COPY 29
+Time: 13.621 ms
+  \Copy Sales.PersonCreditCard From '/root/MSSQLTOPG/data/csvData/Sales.PersonCreditCard.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19118
+Time: 121.497 ms
+  \Copy Sales.SalesTerritory From '/root/MSSQLTOPG/data/csvData/Sales.SalesTerritory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 10
+Time: 8.759 ms
+  \Copy Sales.SalesTerritoryHistory From '/root/MSSQLTOPG/data/csvData/Sales.SalesTerritoryHistory.csv' DELIMITER '~' null as 'null' CSV;
+COPY 17
+Time: 8.027 ms
+  \Copy Sales.ShoppingCartItem From '/root/MSSQLTOPG/data/csvData/Sales.ShoppingCartItem.csv' DELIMITER '~' null as 'null' CSV;
+COPY 3
+Time: 7.804 ms
+  \Copy Sales.SpecialOffer From '/root/MSSQLTOPG/data/csvData/Sales.SpecialOffer.csv' DELIMITER '~' null as 'null' CSV;
+COPY 16
+Time: 9.923 ms
+  \Copy Sales.SpecialOfferProduct From '/root/MSSQLTOPG/data/csvData/Sales.SpecialOfferProduct.csv' DELIMITER '~' null as 'null' CSV;
+COPY 538
+Time: 13.890 ms
+  \Copy Sales.Store From '/root/MSSQLTOPG/data/csvData/Sales.Store.csv' DELIMITER '~' null as 'null' CSV;
+COPY 701
+Time: 62.031 ms
+  \Copy Sales.SalesOrderHeaderEnlarged From '/root/MSSQLTOPG/data/csvData/Sales.SalesOrderHeaderEnlarged.csv' DELIMITER '~' null as 'null' CSV;
+COPY 31465
+Time: 615.227 ms
+  \Copy Sales.SalesOrderDetailEnlarged From '/root/MSSQLTOPG/data/csvData/Sales.SalesOrderDetailEnlarged.csv' DELIMITER '~' null as 'null' CSV;
+COPY 121317
+Time: 2170.927 ms (00:02.171)
+  \Copy Sales.CountryRegionCurrency From '/root/MSSQLTOPG/data/csvData/Sales.CountryRegionCurrency.csv' DELIMITER '~' null as 'null' CSV;
+COPY 109
+Time: 14.433 ms
+  \Copy Sales.CreditCard From '/root/MSSQLTOPG/data/csvData/Sales.CreditCard.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19118
+Time: 148.319 ms
+  \Copy Sales.Currency From '/root/MSSQLTOPG/data/csvData/Sales.Currency.csv' DELIMITER '~' null as 'null' CSV;
+COPY 105
+Time: 8.784 ms
+  \Copy Sales.CurrencyRate From '/root/MSSQLTOPG/data/csvData/Sales.CurrencyRate.csv' DELIMITER '~' null as 'null' CSV;
+COPY 13532
+Time: 158.322 ms
+  \Copy Sales.Customer From '/root/MSSQLTOPG/data/csvData/Sales.Customer.csv' DELIMITER '~' null as 'null' CSV;
+COPY 19820
+Time: 193.691 ms
+  \Copy Sales.SalesOrderDetail From '/root/MSSQLTOPG/data/csvData/Sales.SalesOrderDetail.csv' DELIMITER '~' null as 'null' CSV;
+COPY 121317
+Time: 1323.517 ms (00:01.324)
+  \Copy Sales.SalesOrderHeader From '/root/MSSQLTOPG/data/csvData/Sales.SalesOrderHeader.csv' DELIMITER '~' null as 'null' CSV;
+COPY 31465
+Time: 549.145 ms

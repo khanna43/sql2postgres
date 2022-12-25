@@ -1,0 +1,27 @@
+
+
+load database
+     from mssql://SA:test123$@192.168.29.88:1433/AdventureWorks2017
+     into postgresql://postgres:test123@192.168.29.88:5432/adventureworks2017
+WITH schema only,include drop, create tables, create indexes
+
+SET PostgreSQL PARAMETERS
+      maintenance_work_mem to '128MB',
+      work_mem to '12MB',
+	  search_path to dbo,person,HumanResources,Sales,Production;
+	  CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+	  
+CAST type datetime    to timestamp
+CAST type money to numeric     using float-to-string
+CAST type hierarchyid to bytea
+CAST type xml         to text drop typemod
+
+
+BEFORE LOAD DO
+   $$ create schema if not exists dbo; $$,
+   $$ create schema if not exists employee;     $$,
+   $$ alter database adventureworks2017  set search_path to  dbo,employee $$;
+
+
+
+
